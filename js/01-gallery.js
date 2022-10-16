@@ -35,18 +35,19 @@ gallery.addEventListener("click", (event) => {
   const largeImageUrl = event.target.dataset.source;
 
   // Open modal window with image
-  const instance = basicLightbox.create(`
-    <img src="${largeImageUrl}">
-`);
-  instance.show(() => {
-    document.addEventListener("keydown", onKeyPressed);
+  const instance = basicLightbox.create(`<img src="${largeImageUrl}">`, {
+    onShow: (instance) => {
+      document.addEventListener("keydown", onKeyPressed);
+    },
+    onClose: (instance) => {
+      document.removeEventListener("keydown", onKeyPressed);
+    },
   });
+  instance.show();
 
   function onKeyPressed(event) {
     if (event.code === "Escape") {
-      instance.close(() => {
-        document.removeEventListener("keydown", onKeyPressed);
-      });
+      instance.close();
     }
   }
 });
