@@ -42,8 +42,8 @@ gallery.addEventListener("click", (event) => {
     document.addEventListener("keydown", onKeyPressed);
   });
 
-  function onKeyPressed({ code }) {
-    if (code === "Escape") {
+  function onKeyPressed(event) {
+    if (event.code === "Escape") {
       instance.close(() => {
         document.removeEventListener("keydown", onKeyPressed);
       });
