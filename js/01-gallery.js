@@ -38,7 +38,17 @@ gallery.addEventListener("click", (event) => {
   const instance = basicLightbox.create(`
     <img src="${largeImageUrl}">
 `);
-  instance.show();
+  instance.show(() => {
+    document.addEventListener("keydown", onKeyPressed);
+  });
+
+  function onKeyPressed({ code }) {
+    if (code === "Escape") {
+      instance.close(() => {
+        document.removeEventListener("keydown", onKeyPressed);
+      });
+    }
+  }
 });
 
 // Adding the script and styles of the modal window library basicLightbox. Use the jsdelivrCDN service and add links to minified (.min) library files to your project.
