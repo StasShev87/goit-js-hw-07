@@ -34,7 +34,11 @@ gallery.addEventListener("click", (event) => {
   }
   const largeImageUrl = event.target.dataset.source;
 
-  console.log(largeImageUrl);
+  // Open modal window with image
+  const instance = basicLightbox.create(`
+    <img src="${largeImageUrl}">
+`);
+  instance.show();
 });
 
 // Adding the script and styles of the modal window library basicLightbox. Use the jsdelivrCDN service and add links to minified (.min) library files to your project.
